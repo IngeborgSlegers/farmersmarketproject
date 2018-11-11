@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const sequelize = require('../db');
 
-router.get('/', function(req, res) {
-  res.send('Hey! This is a test route!');
-})
+router.post('/one', function(req, res){
+  res.send("Test 1 went through!")
+});
 
 module.exports = router;

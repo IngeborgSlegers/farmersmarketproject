@@ -3,8 +3,12 @@ const app = express();
 const test = require('./controllers/testcontroller');
 const market = require('./controllers/marketcontroller');
 const sequelize = require('./db');
+const bodyParser = require('body-parser');
 
-sequelize.sync(); // tip: pass in {force: true} for resetting tables
+sequelize.sync(); 
+// tip: pass in {force: true} for resetting tables
+
+app.use(bodyParser.json());
 
 app.use('/test', test)
 app.use('/market', market)
