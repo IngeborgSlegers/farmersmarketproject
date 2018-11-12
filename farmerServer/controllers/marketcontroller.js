@@ -3,8 +3,8 @@ const Market = require('../db').import('../models/market');
 
 router.get('/', (req, res) => {
   Market.findAll()
-    .then(market => res.stats(200).json(market))
-    .catch(err => res.status(500).json({ error: err }))
+      .then(market => res.status(200).json(market))
+      .catch(err => res.status(500).json({ error: err }))
 })
 
 router.post('/', (req, res) => {
