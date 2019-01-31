@@ -5,7 +5,9 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const validateSession = require('../middleware/validate-session')
 
-/* VENDOR SIGNUP */
+/*********************
+ *  VENDOR SIGNUP   * 
+*********************/
 router.post('/signup', (req, res) => {
   Vendor.create({
     vendorName: req.body.vendorName,
@@ -15,7 +17,7 @@ router.post('/signup', (req, res) => {
   .then(
     createSuccess = (vendor) => {
         let token = jwt.sign({
-            id: user.id
+            id: vendor.id
         }, process.env.JWT_SECRET, {
             expiresIn: 60 * 60 * 24
         })
@@ -30,7 +32,9 @@ router.post('/signup', (req, res) => {
 )
 })
 
-/* VENDOR LOG IN */
+/*********************
+ *  VENDOR LOG IN  * 
+*********************/
 router.post('/login', (req, res) => {
     Vendor.findOne({
         where: { email: req.body.email}
@@ -38,14 +42,14 @@ router.post('/login', (req, res) => {
     .then(
         vendor => {
             if (vendor) {
-                bcrypt.compare(req.body.password, password, (err, matches) => {
+                bcrypt.compare(req.body.password, vendor.password, (err, matches) => {
                     if(matches) {
                         let token = jwt.sign({
                             id: vendor.id
                         }, process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24 })
 
                         res.json({
-                            venfor: vendor,
+                            vendor: vendor,
                             message: 'successfully authenticated',
                             sessionToken: token
                         })
@@ -65,6 +69,49 @@ router.post('/login', (req, res) => {
             error: 'failed to process'
         })
     )
+})
+
+/**************************
+ *  READ VENDOR INFO  * 
+**************************/
+router.get('/', validateSession, (req, res) => {
+    Vendor.findOne({
+        where: {
+            id: req.vendor.id
+        }
+    })
+    .then(vendor => res.status(200).json(vendor))
+    .catch(err => res.status(500).json({
+        error: err
+    }))
+})
+
+/**************************
+ *  UPDATE VENDOR INFO  * 
+**************************/
+router.put('/:id', validateSession, (req, res) => {
+    if (!req.errors) {
+        Vendor.update(req.body, { where: { id: req.params.id}})
+            .then(vendor => res.status(200).json(vendor))
+            .catch(err => res.json(req.errors))
+    } else {
+        res.status(500).json(req.errors)
+    }
+})
+
+/**************************
+ *  DELETE VENDOR INFO   * 
+**************************/
+router.delete('/:id', validateSession, (req, res) => {
+    Vendor.destroy({
+        where: {
+            id: req.vendor.id
+        }
+    })
+    .then(vendor => res.status(200).json(vendor))
+    .catch(err => res.status(500).json({
+        error: err
+    }))
 })
 
 module.exports = router;

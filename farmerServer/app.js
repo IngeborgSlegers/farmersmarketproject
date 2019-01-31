@@ -13,6 +13,8 @@ const vendor = require('./controllers/vendorcontroller');
 sequelize.sync(); 
 // tip: pass in {force: true} for resetting tables
 
+app.get('/', (req, res) => res.render('app'))
+
 app.use(bodyParser.json());
 
 app.use(require('./middleware/headers'))
