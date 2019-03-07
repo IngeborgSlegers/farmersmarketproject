@@ -39,14 +39,13 @@ router.post('/login', (req, res) => {
     Vendor.findOne({
         where: { email: req.body.email}
     })
-    .then(
-        vendor => {
+    .then(vendor => {
             if (vendor) {
                 bcrypt.compare(req.body.password, vendor.password, (err, matches) => {
                     if(matches) {
                         let token = jwt.sign({
                             id: vendor.id
-                        }, process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24 })
+                        }, "i_am_secret", { expiresIn: 60 * 60 * 24 })
 
                         res.json({
                             vendor: vendor,
@@ -74,11 +73,9 @@ router.post('/login', (req, res) => {
 /**************************
  *  READ VENDOR INFO  * 
 **************************/
-router.get('/', validateSession, (req, res) => {
+router.get('/:id', validateSession, (req, res) => {
     Vendor.findOne({
-        where: {
-            id: req.vendor.id
-        }
+        where: { id: req.params.id }
     })
     .then(vendor => res.status(200).json(vendor))
     .catch(err => res.status(500).json({
