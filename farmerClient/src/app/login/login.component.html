@@ -1,0 +1,11 @@
+<form>
+  <div class="form-group">
+    <label for='email'>
+      <input type="text" #email required class="info" placeholder="EMAIL" />
+    </label>
+    <label class='password'>
+      <input type="password" #password required class="info" placeholder="PASSWORD" />
+    </label>
+  </div>
+    <button mat-raised-button color="primary" type="submit" (click)=validateLogin(email.value,password.value) class="button">Log In</button>
+</form>

@@ -15,7 +15,7 @@ export class AuthenticationService {
     headers: new HttpHeaders({ "Content-Type": "application/json"})
   };
 
-  private authUrl = "http://localhost:30001/vendor";
+  private authUrl = "http://localhost:3000/vendor";
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -30,14 +30,21 @@ export class AuthenticationService {
   }
 
   login(vendor: Vendor): Observable<any> {
+    console.log("user has logged in")
     return this.http
       .post<Vendor>(`${this.authUrl}/login`, vendor, this.httpOptions)
       .pipe(catchError(this.handleError<Vendor>("login")));
   }
 
   signup(vendor: Vendor): Observable<any> {
+    console.log('user created!')
     return this.http
       .post<Vendor>(`${this.authUrl}/signup`, vendor, this.httpOptions)
       .pipe(catchError(this.handleError<Vendor>("signup")));
+  }
+
+  logout(): void {
+    localStorage.clear();
+    console.log("You are logged out!");
   }
 }

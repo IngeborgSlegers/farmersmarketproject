@@ -1,0 +1,14 @@
+<form>
+  <div class="form-group">
+    <label for='vendorName'>
+      <input type='text' #vendorName required class="info" placeholder="VENDOR NAME" />
+    </label>
+    <label for='email'>
+      <input type="text" #email required class="info" placeholder="EMAIL" />
+    </label>
+    <label class='password'>
+      <input type="password" #password required class="info" placeholder="PASSWORD" />
+    </label>
+  </div>
+    <button mat-raised-button color="primary" type="submit" (click)=signup(vendorName.value,email.value,password.value) class="button">Sign up</button>
+</form>
