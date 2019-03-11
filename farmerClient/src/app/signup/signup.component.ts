@@ -17,11 +17,12 @@ export class SignupComponent implements OnInit {
   signup(vendorName: string, email: string, password: string) {
     this.authService
       .signup({ vendorName, email, password})
-      .subscribe(credentials => {
-        localStorage.setItem("token", credentials.token);
-        console.log('token: ', credentials.token)
+      .subscribe(data => {
+        localStorage.setItem("token", data.sessionToken);
+        console.log('token: ', data.sessionToken)
         console.log('user is registered!')
       })
   }
 
 }
+

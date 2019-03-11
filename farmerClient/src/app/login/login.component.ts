@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
   login(email: string, password: string) {
     this.authService
       .login({ email, password } as Vendor)
-      .subscribe(credentials => {
-        localStorage.setItem("token", credentials.token);
+      .subscribe(data => {
+        localStorage.setItem("token", data.sessionToken);
         console.log("user is logged in")
       })
   }
