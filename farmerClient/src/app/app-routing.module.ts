@@ -5,6 +5,7 @@ import { AuthComponent } from './auth/auth.component';
 import { SignupComponent } from './signup/signup.component';
 import { AccountComponent } from './account/account.component';
 import { MarketComponent } from './market/market.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/markets", pathMatch: "full" },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: "markets", component: MarketComponent},
   { path: "auth", component: AuthComponent },
   { path: "account", component: AccountComponent },
-  { path: "signup", component: SignupComponent }
+  { path: "signup", component: SignupComponent },
+  // { path: "login", component: LoginComponent}
 ];
 
 @NgModule({

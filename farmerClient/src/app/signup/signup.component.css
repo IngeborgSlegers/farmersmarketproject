@@ -1,0 +1,14 @@
+.signupcard {
+  width: 30%;
+  text-align: center;
+  margin: auto;
+  margin-top: 25vh;
+  background-color: #673fb4;
+}
+
+.info {
+  display: block;
+  margin: auto;
+  margin-top: 3vh;
+  padding: 10px;
+}

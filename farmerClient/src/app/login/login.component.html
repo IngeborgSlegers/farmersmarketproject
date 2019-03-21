@@ -1,12 +1,15 @@
-<form>
-  <div class="form-group">
-    <label for='email'>
+<mat-card class="logincard">
+  <form>
+    <label class="loginlabel" for='email'>
       <input type="text" #email required class="info" placeholder="EMAIL" />
     </label>
     <label class='password'>
       <input type="password" #password required class="info" placeholder="PASSWORD" />
     </label>
-  </div>
-    <button mat-raised-button color="primary" type="submit" (click)=validateLogin(email.value,password.value) class="button">Log In</button>
-    <span>Not a user? <a routerLink='/signup'>Sign up here</a></span>
-</form>
+    <mat-card-actions>
+      <button mat-raised-button color="accent" type="submit" (click)=validateLogin(email.value,password.value) class="button">Log In</button>
+      <br />
+      <span>Not a user? <a routerLink='/signup'>Sign up here</a></span>
+    </mat-card-actions>
+  </form>
+</mat-card>

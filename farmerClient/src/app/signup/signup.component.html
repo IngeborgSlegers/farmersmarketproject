@@ -1,5 +1,5 @@
-<form> 
-  <div class="form-group">
+<mat-card class="signupcard">
+  <form> 
     <label for='vendorName'>
       <input type='text' #vendorName required class="info" placeholder="VENDOR NAME" />
     </label>
@@ -9,6 +9,10 @@
     <label class='password'>
       <input type="password" #password required class="info" placeholder="PASSWORD" />
     </label>
-  </div>
-    <button color="primary" type="submit" (click)=signup(vendorName.value,email.value,password.value) class="button">Sign up</button>
-</form>
+    <mat-card-actions>  
+      <button mat-flat-button color="accent" type="submit" (click)=signup(vendorName.value,email.value,password.value) class="button">Sign up</button>
+      <br />
+      <span>Already have an account? <a routerLink='/auth'>Login here</a></span>
+    </mat-card-actions>
+  </form>
+</mat-card>

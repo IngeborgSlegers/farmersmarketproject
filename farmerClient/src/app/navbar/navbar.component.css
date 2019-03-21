@@ -1,10 +1,5 @@
-nav {
-  background-color: lightcyan;
-  height: 5vh;
-  width: 100vw;
-}
 
-nav button {
-  margin-top: 2vh;
+.buttons {
+  /* margin-top: 2vh; */
   margin-left: 2vh
 }
